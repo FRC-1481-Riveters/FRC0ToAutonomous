@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.sensors.Pigeon2;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -9,6 +9,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class SwerveSubsystem extends SubsystemBase {
@@ -48,7 +49,8 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad,
             DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
-    private final Pigeon2 gyro = new Pigeon2(60 /*canID*/, "CANivore");
+    private final Pigeon2 gyro = new Pigeon2( Constants.DriveConstants.gyroPort, "CANivore" );
+
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
             new Rotation2d(0));
 
@@ -68,6 +70,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double getHeading() {
+        //TODO: not sure if the Pigeon2 getYaw returning -368 to 368 is OK here (should it be 0...360)?
         return Math.IEEEremainder(gyro.getYaw(), 360);
     }
 
