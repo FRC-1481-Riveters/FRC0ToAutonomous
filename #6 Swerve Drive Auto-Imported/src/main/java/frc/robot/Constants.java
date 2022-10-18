@@ -15,14 +15,14 @@ public final class Constants {
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
-        public static final double kPTurning = 0.5;
+        public static final double kPTurning = 0.05;
     }
 
     public static final class DriveConstants {
 
-        public static final double kTrackWidth = Units.inchesToMeters(21);
+        public static final double kTrackWidth = Units.inchesToMeters(20.5);
         // Distance between right and left wheels
-        public static final double kWheelBase = Units.inchesToMeters(25.5);
+        public static final double kWheelBase = Units.inchesToMeters(20.5);
         // Distance between front and back wheels
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
                 new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
@@ -31,15 +31,15 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
 
         // FIXME: patch these motor IDs up to match the Swervie 2022 configuration
-        public static final int kFrontLeftDriveMotorPort = 8;
-        public static final int kBackLeftDriveMotorPort = 2;
-        public static final int kFrontRightDriveMotorPort = 6;
-        public static final int kBackRightDriveMotorPort = 4;
+        public static final int kFrontLeftDriveMotorPort = 15;
+        public static final int kBackLeftDriveMotorPort = 18;
+        public static final int kFrontRightDriveMotorPort = 12;
+        public static final int kBackRightDriveMotorPort = 21;
 
-        public static final int kFrontLeftTurningMotorPort = 7;
-        public static final int kBackLeftTurningMotorPort = 1;
-        public static final int kFrontRightTurningMotorPort = 5;
-        public static final int kBackRightTurningMotorPort = 3;
+        public static final int kFrontLeftTurningMotorPort = 13;
+        public static final int kBackLeftTurningMotorPort = 16;
+        public static final int kFrontRightTurningMotorPort = 10;
+        public static final int kBackRightTurningMotorPort = 19;
 
         public static final int gyroPort = 60;
 
@@ -54,10 +54,10 @@ public final class Constants {
         public static final boolean kBackRightDriveEncoderReversed = false;
 
         // FIXME: replace these RoboRIO analog port numbers with the Swervie 2022 CANCoder IDs
-        public static final int kFrontLeftDriveAbsoluteEncoderPort = 0;
-        public static final int kBackLeftDriveAbsoluteEncoderPort = 2;
-        public static final int kFrontRightDriveAbsoluteEncoderPort = 1;
-        public static final int kBackRightDriveAbsoluteEncoderPort = 3;
+        public static final int kFrontLeftDriveAbsoluteEncoderPort = 14;
+        public static final int kBackLeftDriveAbsoluteEncoderPort = 17;
+        public static final int kFrontRightDriveAbsoluteEncoderPort = 11;
+        public static final int kBackRightDriveAbsoluteEncoderPort = 20;
 
         public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;

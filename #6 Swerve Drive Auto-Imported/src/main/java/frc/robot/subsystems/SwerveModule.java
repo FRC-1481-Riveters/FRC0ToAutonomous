@@ -39,10 +39,10 @@ public class SwerveModule {
 
         this.absoluteEncoderOffsetDegrees = absoluteEncoderOffsetDegrees;
         this.absoluteEncoderReversed = absoluteEncoderReversed;
-        absoluteEncoder = new CANCoder(absoluteEncoderId);
+        absoluteEncoder = new CANCoder(absoluteEncoderId, "CANivore");
 
-        driveMotor = new TalonFX(driveMotorId, "CANifier");
-        turningMotor = new TalonFX(turningMotorId, "CANifier");
+        driveMotor = new TalonFX(driveMotorId, "CANivore");
+        turningMotor = new TalonFX(turningMotorId, "CANivore");
 
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
