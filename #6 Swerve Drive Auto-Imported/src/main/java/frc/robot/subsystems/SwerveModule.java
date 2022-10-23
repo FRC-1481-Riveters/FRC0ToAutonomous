@@ -1,10 +1,8 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.RobotController;
+//import com.revrobotics.CANSparkMax;
+//import com.revrobotics.RelativeEncoder;
+//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -13,7 +11,6 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -53,11 +50,13 @@ public class SwerveModule {
         currentConfig.currentLimit = 30;
         currentConfig.enable = true;
 
+        driveMotor.configFactoryDefault();
         driveMotor.setNeutralMode( NeutralMode.Brake );
         driveMotor.configVoltageCompSaturation(12.5);
         driveMotor.enableVoltageCompensation(true);
         driveMotor.configSupplyCurrentLimit( currentConfig );
 
+        turningMotor.configFactoryDefault();
         turningMotor.setNeutralMode( NeutralMode.Brake );
         currentConfig.currentLimit = 15;
         turningMotor.configVoltageCompSaturation(12.5);
@@ -67,7 +66,6 @@ public class SwerveModule {
         absoluteEncoder.configSensorInitializationStrategy( SensorInitializationStrategy.BootToAbsolutePosition );
         absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
-        driveMotor.configIntegratedSensorAbsoluteRange(AbsoluteSensorRange.Signed_PlusMinus180);
         turningMotor.configIntegratedSensorAbsoluteRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
         turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
@@ -78,10 +76,7 @@ public class SwerveModule {
 
     public double getDrivePosition() {
         double position;
-        position = driveMotor.getSelectedSensorPosition();
-
-        // convert +/- 180 degrees to radians
-        position = position * (Math.PI / 180);
+        position = driveMotor.getSelectedSensorPosition();  // 0..4095 counts per revolution
 
         return( position );
     }
@@ -98,10 +93,10 @@ public class SwerveModule {
 
     public double getDriveVelocity() {
         double velocity;
-        velocity = driveMotor.getSelectedSensorPosition();
+        velocity = driveMotor.getSelectedSensorVelocity();
 
-        // convert degrees/100 milliseconds to radians per second
-        velocity = velocity * (Math.PI / 180) * 10;
+        // convert (0..409.5) counts per 100 ms into radians per second
+        velocity = velocity * ((360 * 10) / 4096) * (Math.PI / 180);
 
         return( velocity );
     }
@@ -111,20 +106,9 @@ public class SwerveModule {
         velocity = turningMotor.getSelectedSensorPosition();
 
         // convert degrees/100 milliseconds to radians per second
-        velocity = velocity * (Math.PI / 180) * 10;
+        velocity = (velocity * 10) * (Math.PI / 180);
 
         return( velocity );
-    }
-
-    public double getAbsoluteEncoderRad() {
-        double position = absoluteEncoder.getAbsolutePosition();
-
-        position -= absoluteEncoderOffsetDegrees;
-
-        // convert +/- 180 degrees to radians
-        position = position * (Math.PI / 180);
-
-        return position * (absoluteEncoderReversed ? -1.0 : 1.0);
     }
 
     public double getAbsoluteEncoderDegrees() {

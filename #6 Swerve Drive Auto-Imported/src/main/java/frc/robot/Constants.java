@@ -53,7 +53,7 @@ public final class Constants {
         public static final boolean kFrontRightDriveEncoderReversed = false;
         public static final boolean kBackRightDriveEncoderReversed = false;
 
-        // FIXME: replace these RoboRIO analog port numbers with the Swervie 2022 CANCoder IDs
+        // CANCoder IDs
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 14;
         public static final int kBackLeftDriveAbsoluteEncoderPort = 17;
         public static final int kFrontRightDriveAbsoluteEncoderPort = 11;
@@ -70,7 +70,7 @@ public final class Constants {
         public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -1.816;
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -4.811;
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 3;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
