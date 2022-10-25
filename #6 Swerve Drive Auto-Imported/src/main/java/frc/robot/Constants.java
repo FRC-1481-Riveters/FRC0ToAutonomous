@@ -15,7 +15,7 @@ public final class Constants {
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
-        public static final double kPTurning = 0.05;
+        public static final double kPTurning = 0.2;
     }
 
     public static final class DriveConstants {
@@ -50,8 +50,8 @@ public final class Constants {
 
         public static final boolean kFrontLeftDriveEncoderReversed = true;
         public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
+        public static final boolean kBackRightDriveEncoderReversed = true;
 
         // CANCoder IDs
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 14;
@@ -65,10 +65,10 @@ public final class Constants {
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
         // FIXME: Replace these with the absolute encoder offsets in degrees from Swervie 2022
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = -0.254;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = -1.252;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = -1.816;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = -4.811;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad  = -0.072097;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad   = 0.52001;
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 2.50039;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad  = 2.88695;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 3;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;

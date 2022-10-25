@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.subsystems.SwerveModule;
 
 public class SwerveSubsystem extends SubsystemBase {
     private final SwerveModule frontLeft = new SwerveModule(
@@ -66,11 +67,15 @@ public class SwerveSubsystem extends SubsystemBase {
     public void zeroHeading() {
         gyro.setAccumZAngle(0); //.setFusedHeading(0);
         gyro.setYaw(0);
+        frontLeft.resetEncoders();
+        backLeft.resetEncoders();
+        frontRight.resetEncoders();
+        backRight.resetEncoders();
     }
 
     public double getHeading() {
         //TODO: not sure if the Pigeon2 getYaw returning -368 to 368 is OK here (should it be 0...360)?
-        return Math.IEEEremainder(gyro.getYaw(), 360);
+        return Math.IEEEremainder(-gyro.getYaw(), 360);
     }
 
     public Rotation2d getRotation2d() {
@@ -91,6 +96,10 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getState());
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        frontLeft.printAngle();
+        frontRight.printAngle();
+        backLeft.printAngle();
+        backRight.printAngle();
     }
 
     public void stopModules() {

@@ -76,7 +76,9 @@ public class SwerveModule {
 
     public double getDrivePosition() {
         double position;
-        position = driveMotor.getSelectedSensorPosition();  // 0..4095 counts per revolution
+        position = driveMotor.getSelectedSensorPosition();  // 0..2048 counts per revolution
+        position = (position / 2048) * (14.0 / 50.0) * (28.0 / 16.0) * (15.0 / 60.0);
+        position = position * ModuleConstants.kWheelDiameterMeters * Math.PI;
 
         return( position );
     }
@@ -85,8 +87,13 @@ public class SwerveModule {
         double position;
         position = turningMotor.getSelectedSensorPosition();
 
-        // convert +/- 180 degrees to radians
-        position = position * (Math.PI / 180);
+        // convert the encodercount to radians
+
+
+        position = position * (2*Math.PI / (2048*12.8));
+        //driving geer ratio; (14.0 / 50.0) * (28.0 / 16.0) * (15.0 / 60.0),
+        //steering geer ratio; (15.0 / 32.0) * (10.0 / 60.0), 
+
 
         return( position );
     }
@@ -95,8 +102,8 @@ public class SwerveModule {
         double velocity;
         velocity = driveMotor.getSelectedSensorVelocity();
 
-        // convert (0..409.5) counts per 100 ms into radians per second
-        velocity = velocity * ((360 * 10) / 4096) * (Math.PI / 180);
+        velocity = (velocity / 204.8) * (14.0 / 50.0) * (28.0 / 16.0) * (15.0 / 60.0);
+        velocity = velocity * ModuleConstants.kWheelDiameterMeters * Math.PI;
 
         return( velocity );
     }
@@ -112,19 +119,20 @@ public class SwerveModule {
     }
 
     public double getAbsoluteEncoderDegrees() {
-        double position = absoluteEncoder.getAbsolutePosition();
-
+        double position = absoluteEncoder.getAbsolutePosition() * (Math.PI/180);
+        SmartDashboard.putNumber("absoluteEncoder" + absoluteEncoder.getDeviceID() + "]", position);
         position = position - absoluteEncoderOffsetDegrees;
 
         return position * (absoluteEncoderReversed ? -1.0 : 1.0);
     }
 
+    public void printAngle() {
+        SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", getTurningPosition());
+    }
+
     public void resetEncoders() {
         // Clear the drive motor encoder position
         driveMotor.setSelectedSensorPosition(0);
-
-        // Since the turning motor is a relative encoder, set its position equal to the absolute encoder
-        turningMotor.setSelectedSensorPosition( getAbsoluteEncoderDegrees() );
     }
 
     public SwerveModuleState getState() {
@@ -141,6 +149,7 @@ public class SwerveModule {
                         state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond );
         turningMotor.set( ControlMode.PercentOutput, 
                           turningPidController.calculate( getTurningPosition(), state.angle.getRadians() ) );
+                          SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", getTurningPosition());
         SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
 
