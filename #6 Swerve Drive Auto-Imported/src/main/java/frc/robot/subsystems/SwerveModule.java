@@ -88,8 +88,6 @@ public class SwerveModule {
         position = turningMotor.getSelectedSensorPosition();
 
         // convert the encodercount to radians
-
-
         position = position * (2*Math.PI / (2048*12.8));
         //driving geer ratio; (14.0 / 50.0) * (28.0 / 16.0) * (15.0 / 60.0),
         //steering geer ratio; (15.0 / 32.0) * (10.0 / 60.0), 
@@ -119,20 +117,23 @@ public class SwerveModule {
     }
 
     public double getAbsoluteEncoderDegrees() {
-        double position = absoluteEncoder.getAbsolutePosition() * (Math.PI/180);
+        double position = absoluteEncoder.getAbsolutePosition();
         SmartDashboard.putNumber("absoluteEncoder" + absoluteEncoder.getDeviceID() + "]", position);
         position = position - absoluteEncoderOffsetDegrees;
-
         return position * (absoluteEncoderReversed ? -1.0 : 1.0);
     }
 
     public void printAngle() {
-        SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", getTurningPosition());
+        SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", turningMotor.getSelectedSensorPosition() /*getTurningPosition() */);
     }
 
     public void resetEncoders() {
+        double absPosition;
         // Clear the drive motor encoder position
-        driveMotor.setSelectedSensorPosition(0);
+        driveMotor.setSelectedSensorPosition( 0 );
+        absPosition = getAbsoluteEncoderDegrees();
+        absPosition = absPosition * ((2048*12.8)/360);
+        turningMotor.setSelectedSensorPosition( absPosition );
     }
 
     public SwerveModuleState getState() {
@@ -149,7 +150,7 @@ public class SwerveModule {
                         state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond );
         turningMotor.set( ControlMode.PercentOutput, 
                           turningPidController.calculate( getTurningPosition(), state.angle.getRadians() ) );
-                          SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", getTurningPosition());
+        SmartDashboard.putNumber("Turning Position[" + absoluteEncoder.getDeviceID() + "]", turningMotor.getSelectedSensorPosition() );
         SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
 

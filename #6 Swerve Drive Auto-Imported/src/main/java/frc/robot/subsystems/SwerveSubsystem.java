@@ -19,7 +19,7 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kFrontLeftDriveEncoderReversed,
             DriveConstants.kFrontLeftTurningEncoderReversed,
             DriveConstants.kFrontLeftDriveAbsoluteEncoderPort,
-            DriveConstants.kFrontLeftDriveAbsoluteEncoderOffsetRad,
+            DriveConstants.kFrontLeftDriveAbsoluteEncoderOffset,
             DriveConstants.kFrontLeftDriveAbsoluteEncoderReversed);
 
     private final SwerveModule frontRight = new SwerveModule(
@@ -28,7 +28,7 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kFrontRightDriveEncoderReversed,
             DriveConstants.kFrontRightTurningEncoderReversed,
             DriveConstants.kFrontRightDriveAbsoluteEncoderPort,
-            DriveConstants.kFrontRightDriveAbsoluteEncoderOffsetRad,
+            DriveConstants.kFrontRightDriveAbsoluteEncoderOffset,
             DriveConstants.kFrontRightDriveAbsoluteEncoderReversed);
 
     private final SwerveModule backLeft = new SwerveModule(
@@ -37,7 +37,7 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kBackLeftDriveEncoderReversed,
             DriveConstants.kBackLeftTurningEncoderReversed,
             DriveConstants.kBackLeftDriveAbsoluteEncoderPort,
-            DriveConstants.kBackLeftDriveAbsoluteEncoderOffsetRad,
+            DriveConstants.kBackLeftDriveAbsoluteEncoderOffset,
             DriveConstants.kBackLeftDriveAbsoluteEncoderReversed);
 
     private final SwerveModule backRight = new SwerveModule(
@@ -46,7 +46,7 @@ public class SwerveSubsystem extends SubsystemBase {
             DriveConstants.kBackRightDriveEncoderReversed,
             DriveConstants.kBackRightTurningEncoderReversed,
             DriveConstants.kBackRightDriveAbsoluteEncoderPort,
-            DriveConstants.kBackRightDriveAbsoluteEncoderOffsetRad,
+            DriveConstants.kBackRightDriveAbsoluteEncoderOffset,
             DriveConstants.kBackRightDriveAbsoluteEncoderReversed);
 
     private final Pigeon2 gyro = new Pigeon2( Constants.DriveConstants.gyroPort, "CANivore" );
