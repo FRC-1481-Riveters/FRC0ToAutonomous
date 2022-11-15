@@ -55,7 +55,11 @@ public class RobotContainer {
                 List.of(
                         new Translation2d(1.5, -1.5),
                         new Translation2d(0, -3),
-                        new Translation2d(-1.5, -1.5)
+                        new Translation2d(-1.5, -1.5),
+                        new Translation2d(0, 0),
+                        new Translation2d(-1.5, -1.5),
+                        new Translation2d(0, -3),
+                        new Translation2d(1.5, -1.5)
                         ),
                 new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
                 trajectoryConfig);
