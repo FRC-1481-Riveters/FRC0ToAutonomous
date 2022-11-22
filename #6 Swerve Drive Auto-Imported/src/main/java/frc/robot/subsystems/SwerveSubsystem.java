@@ -68,14 +68,14 @@ public class SwerveSubsystem extends SubsystemBase {
         gyro.setAccumZAngle(0); //.setFusedHeading(0);
         gyro.setYaw(0);
         frontLeft.resetEncoders();
-        backLeft.resetEncoders();
         frontRight.resetEncoders();
+        backLeft.resetEncoders();
         backRight.resetEncoders();
     }
 
     public double getHeading() {
         //TODO: not sure if the Pigeon2 getYaw returning -368 to 368 is OK here (should it be 0...360)?
-        return Math.IEEEremainder(-gyro.getYaw(), 360);
+        return Math.IEEEremainder( gyro.getYaw(), 360 );
     }
 
     public Rotation2d getRotation2d() {
