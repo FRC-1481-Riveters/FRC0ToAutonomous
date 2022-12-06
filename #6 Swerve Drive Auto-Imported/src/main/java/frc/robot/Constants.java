@@ -25,10 +25,10 @@ public final class Constants {
         public static final double kWheelBase = Units.inchesToMeters(20.5);
         // Distance between front and back wheels
         public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-                new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-                new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
-                new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
+                new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+                new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+                new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
         // FIXME: patch these motor IDs up to match the Swervie 2022 configuration
         public static final int kFrontLeftDriveMotorPort = 15;
@@ -43,15 +43,15 @@ public final class Constants {
 
         public static final int gyroPort = 60;
 
-        public static final boolean kFrontLeftTurningEncoderReversed = true;
-        public static final boolean kFrontRightTurningEncoderReversed = true;
-        public static final boolean kBackLeftTurningEncoderReversed = true;
-        public static final boolean kBackRightTurningEncoderReversed = true;
+        public static final boolean kFrontLeftTurningEncoderReversed = false;
+        public static final boolean kFrontRightTurningEncoderReversed = false;
+        public static final boolean kBackLeftTurningEncoderReversed = false;
+        public static final boolean kBackRightTurningEncoderReversed = false;
 
         public static final boolean kFrontLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
         public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kBackRightDriveEncoderReversed = true;
 
         // CANCoder IDs
         public static final int kFrontLeftDriveAbsoluteEncoderPort = 14;
@@ -59,15 +59,15 @@ public final class Constants {
         public static final int kBackLeftDriveAbsoluteEncoderPort = 17;
         public static final int kBackRightDriveAbsoluteEncoderPort = 20;
 
-        public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = true;
-        public static final boolean kFrontRightDriveAbsoluteEncoderReversed = true;
-        public static final boolean kBackLeftDriveAbsoluteEncoderReversed = true;
-        public static final boolean kBackRightDriveAbsoluteEncoderReversed = true;
+        public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
+        public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
+        public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
+        public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffset  = -2.373;
-        public static final double kFrontRightDriveAbsoluteEncoderOffset = -40.518;
-        public static final double kBackLeftDriveAbsoluteEncoderOffset   = 26.807;
-        public static final double kBackRightDriveAbsoluteEncoderOffset  = -17.490;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffset  = -4.1;
+        public static final double kFrontRightDriveAbsoluteEncoderOffset = 143.4;
+        public static final double kBackLeftDriveAbsoluteEncoderOffset   = 29.8;
+        public static final double kBackRightDriveAbsoluteEncoderOffset  = 165.4;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 4;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
@@ -84,10 +84,10 @@ public final class Constants {
         public static final double kMaxAngularSpeedRadiansPerSecond = 
                 DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 1;
-        public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 2;
+        public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI;
         public static final double kPXController = 5;
         public static final double kPYController = 5;
-        public static final double kPThetaController = 6;
+        public static final double kPThetaController = 2.0;
 
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints = //
                 new TrapezoidProfile.Constraints(

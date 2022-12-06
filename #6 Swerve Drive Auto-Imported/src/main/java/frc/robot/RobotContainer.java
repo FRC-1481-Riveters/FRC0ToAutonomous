@@ -33,7 +33,7 @@ public class RobotContainer {
 
     private final Joystick driverJoystick = new Joystick(OIConstants.kDriverControllerPort);
 
-    private final String trajectoryJSON = "paths/Circle.wpilib.json";
+    private final String trajectoryJSON = "paths/HalfCircle.wpilib.json";
 
     private Trajectory circleTrajectory = new Trajectory();
 
@@ -41,8 +41,8 @@ public class RobotContainer {
         swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 swerveSubsystem,
                 () -> -driverJoystick.getRawAxis(OIConstants.kDriverYAxis),
-                () -> driverJoystick.getRawAxis(OIConstants.kDriverXAxis),
-                () -> driverJoystick.getRawAxis(OIConstants.kDriverRotAxis),
+                () -> -driverJoystick.getRawAxis(OIConstants.kDriverXAxis),
+                () -> -driverJoystick.getRawAxis(OIConstants.kDriverRotAxis),
                 () -> !driverJoystick.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
 
         configureButtonBindings();
